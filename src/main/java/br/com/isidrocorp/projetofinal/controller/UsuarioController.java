@@ -3,7 +3,9 @@ package br.com.isidrocorp.projetofinal.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.isidrocorp.projetofinal.dao.UsuarioDAO;
@@ -31,13 +33,26 @@ public class UsuarioController {
 	
 	@GetMapping("/usuarios")
 	public ArrayList<Usuario> getAll(){
-		
 		ArrayList<Usuario> lista;
 		// consultei do banco (único detalhe: o findAll não retorna ArrayList, mas retorna uma interface compatível,
 		//                     bastando apenas converter)
 		lista = (ArrayList<Usuario>)dao.findAll();
+		// para não mostrar as senhas
+		for (Usuario u: lista) {
+			u.setSenha("*********");
+		}
 		return lista;
+	}
+	
+	@GetMapping("/usuarios/{id}")
+	public ResponseEntity<Usuario> getUsuarioPeloId(@PathVariable int id) {
+		Usuario resultado = dao.findById(id).orElse(null);
+		if (resultado != null) {  // meu usuario Existe
+			return ResponseEntity.ok(resultado);
+		}
+		else {
+			return ResponseEntity.status(401).build();
+		}
 		
 	}
-
 }
