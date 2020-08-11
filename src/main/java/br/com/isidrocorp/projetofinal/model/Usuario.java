@@ -68,4 +68,11 @@ public class Usuario {
 	public void setFuncional(int funcional) {
 		this.funcional = funcional;
 	}
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", racf=" + racf
+				+ ", funcional=" + funcional + "]";
+	}
+	
+	
 }
