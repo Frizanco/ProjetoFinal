@@ -2,6 +2,7 @@ package br.com.isidrocorp.projetofinal.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,6 +34,7 @@ public class Usuario {
 	
 	@Column(name="funcional", unique=true)
 	private int    funcional;
+	
 	
 	@ManyToOne
 	@JsonIgnoreProperties("listaUsers") // ignoro o atributo "listaUsers" do departamento
