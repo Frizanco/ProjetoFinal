@@ -70,7 +70,6 @@ public class UsuarioController {
 				// se as senhas não conferem, significa que o usuário existe, porém a senha está errada
 				return ResponseEntity.status(401).build(); // retorna o código 401 - Unauthorized
 			}
-			
 		}
 		else {
 			// se não encontrei, retorna um código de NOT FOUND (404)

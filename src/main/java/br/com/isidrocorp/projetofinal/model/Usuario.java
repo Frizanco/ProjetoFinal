@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity                     // indica que Usuario é uma entidade armazenável no banco
@@ -30,6 +31,9 @@ public class Usuario {
 	
 	@Column(name="funcional", unique=true)
 	private int    funcional;
+	
+	@ManyToOne
+	private Departamento depto;
 	
 	
 	public int getId() {
@@ -67,6 +71,12 @@ public class Usuario {
 	}
 	public void setFuncional(int funcional) {
 		this.funcional = funcional;
+	}
+	public Departamento getDepto() {
+		return depto;
+	}
+	public void setDepto(Departamento depto) {
+		this.depto = depto;
 	}
 	@Override
 	public String toString() {
