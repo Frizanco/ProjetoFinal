@@ -1,11 +1,17 @@
 package br.com.isidrocorp.projetofinal.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -26,9 +32,9 @@ public class AGENCIA {
 	@Column(name="hora_fim")
 	private int horaFim;
 	
-	//@OneToMany(mappedBy="AGC", cascade=CascadeType.ALL)
-	//@JsonIgnoreProperties("AGC")
-	//private List<AGENDAMENTO> listaAGENDAMENTO;
+	@OneToMany(mappedBy="agc", cascade=CascadeType.ALL)
+	@JsonIgnoreProperties("agc")
+	private List<AGENDAMENTO> listaAGENDAMENTO;
 
 	public int getId() {
 		return id;
@@ -54,7 +60,5 @@ public class AGENCIA {
 	public void setHoraFim(int horaFim) {
 		this.horaFim = horaFim;
 	}
-	
-	
-	
+		
 }

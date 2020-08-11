@@ -7,9 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -32,19 +37,33 @@ public class AGENDAMENTO {
 	
 	@Column(name="data_agendamento")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(pattern="dd/MM/yyyy", shape=JsonFormat.Shape.STRING)
 	private Date dataAgendamento;
 	
 	@Column(name="hora_agendamento")
+	@JsonFormat(pattern="HH:mm", shape=JsonFormat.Shape.STRING)
 	@Temporal(TemporalType.TIME)
 	private Date horaAgendamento;
 	
 	@Column(name="observacao",length=255)
 	private String observacoes;	
 	
-	//@ManyToOne
-	//@JsonIgnoreProperties("listaAGENDAMENTO") 
-	//private AGENCIA AGC;
+	@ManyToOne
+	@JoinColumn(name="id_agencia")
+	@JsonIgnoreProperties("listaAGENDAMENTO") 
+	private AGENCIA agc;
+	
+	
 
+	@Override
+	public String toString() {
+		return "AGENDAMENTO [numSeq=" + numSeq + ", nomeCliente=" + nomeCliente + ", emailCliente=" + emailCliente
+				+ ", celularCliente=" + celularCliente + ", dataAgendamento=" + dataAgendamento + ", horaAgendamento="
+				+ horaAgendamento + ", observacoes=" + observacoes + ", agc=" + agc + "]";
+	}
+	
+	
+	
 	public int getNumSeq() {
 		return numSeq;
 	}
@@ -87,5 +106,12 @@ public class AGENDAMENTO {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
+	public AGENCIA getAgc() {
+		return agc;
+	}
+	public void setAgc(AGENCIA aGC) {
+		agc = aGC;
+	}
+	
 	
 }
