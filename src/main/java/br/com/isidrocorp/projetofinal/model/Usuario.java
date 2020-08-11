@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity                     // indica que Usuario é uma entidade armazenável no banco
 @Table(name="tbl_usuario")  // vou associar esta classe à tabela de nome "tbl_usuario"
 public class Usuario {
@@ -33,6 +35,7 @@ public class Usuario {
 	private int    funcional;
 	
 	@ManyToOne
+	@JsonIgnoreProperties("listaUsers") // ignoro o atributo "listaUsers" do departamento
 	private Departamento depto;
 	
 	
